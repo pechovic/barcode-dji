@@ -12,7 +12,9 @@ Run Sample Application https://developer.dji.com/mobile-sdk/documentation/quick-
 
 Mobile SDK Architecture https://developer.dji.com/mobile-sdk/documentation/introduction/sdk_architectural_overview.html
 
-GITHUB - Mobile SDK and Sample Application https://github.com/dji-sdk/Mobile-SDK-iOS
+GITHUB - Mobile SDK and Sample Application 
+https://github.com/dji-sdk/Mobile-SDK-Android
+https://github.com/dji-sdk/Mobile-SDK-iOS
 
 Downloads page to download the simulator and drivers https://developer.dji.com/mobile-sdk/downloads/
   
