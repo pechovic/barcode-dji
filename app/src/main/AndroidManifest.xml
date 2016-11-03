@@ -3,6 +3,7 @@
     package="barcode.barclays.com.drone">
 
     <application
+        android:name=".common.DJIBarcodeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
