@@ -10,7 +10,7 @@
         android:id="@+id/camera_input"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorCyan"/>
 
     <Button
         android:id="@+id/stabilize_drone_btn"
@@ -18,4 +18,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/stabilize_btn_text"/>
+
+    <Button
+        android:id="@+id/connect_drone_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/connect_btn_text"/>
+
+    <Button
+        android:id="@+id/test_drone_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/test_btn_text"/>
 </RelativeLayout>
