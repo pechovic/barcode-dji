@@ -3,11 +3,18 @@ package barcode.barclays.com.drone;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +28,7 @@ public class ExampleInstrumentedTest {
 
     private static final int SCALE = 3;
     public static final int THRESHHOLD = 3000;
+    private static final String TAG = ExampleInstrumentedTest.class.getName();
 
 
     @Test
@@ -36,7 +44,7 @@ public class ExampleInstrumentedTest {
         return Bitmap.createScaledBitmap(small, source.getWidth(), source.getHeight(), true);
     }
 
-    private Bitmap treshhold(Bitmap input){
+    private Bitmap threshhold(Bitmap input){
         final Bitmap output = input.copy(input.getConfig(), false);
         for (int x=0; x < input.getWidth(); x++) {
             for (int y=0; y < input.getHeight(); y++) {
@@ -53,9 +61,9 @@ public class ExampleInstrumentedTest {
     private Coordinates averageWhite(Bitmap bitmap) {
         int partialX = 0;
         int partialY = 0;
-        for (int x=0; x < input.getWidth(); x++) {
-            for (int y=0; y < input.getHeight(); y++) {
-                if(input.getPixel(x,y) == Color.WHITE) {
+        for (int x=0; x < bitmap.getWidth(); x++) {
+            for (int y=0; y < bitmap.getHeight(); y++) {
+                if(bitmap.getPixel(x,y) == Color.WHITE) {
                     partialX = partialX + x;
                     partialY = partialY + y;
                 }
