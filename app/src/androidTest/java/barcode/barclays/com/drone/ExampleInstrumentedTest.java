@@ -46,9 +46,9 @@ public class ExampleInstrumentedTest {
         final Bitmap blured = blur(source);
         save(blured);
         final Bitmap thresholded = threshhold(blured);
-        save(threshholded);
-        final Coordinates coords = calcWhiteMassCenter(threshholded);
-        Log.i(TAG, "x: " + coords.x + "; y:" + y);
+        save(thresholded);
+        final Coordinates coords = calcWhiteMassCenter(thresholded);
+        Log.i(TAG, "x: " + coords.x + "; y:" + coords.y);
         assertTrue(X - DELTA < coords.x && coords.x <  X + DELTA);
         assertTrue(Y - DELTA < coords.y && coords.y <  Y + DELTA);
     }
