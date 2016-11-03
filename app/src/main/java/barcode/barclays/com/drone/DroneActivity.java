@@ -72,6 +72,18 @@ public class DroneActivity extends AppCompatActivity {
     @OnClick(R.id.connect_drone_btn)
     void connectDroneBtnClicked(View view) {
         Toast.makeText(this, "Connect clicked!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Stabilize clicked!", Toast.LENGTH_SHORT).show();
+
+        for (int i = 0; i < 400; i++) {
+            DJIBarcodeApplication.getAircraftInstance().getFlightController().sendVirtualStickFlightControlData(
+                    new DJIVirtualStickFlightControlData(0, -10, 0, 0), null);
+
+            try {
+                Thread.sleep(10, 0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @OnClick(R.id.test_drone_btn)
