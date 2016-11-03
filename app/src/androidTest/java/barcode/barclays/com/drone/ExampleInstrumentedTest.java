@@ -27,8 +27,8 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    private static final int SCALE = 3;
-    public static final int THRESHHOLD = 500;
+    private static final int SCALE = 50;
+    public static final int THRESHHOLD = 250;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
 
 
@@ -42,6 +42,7 @@ public class ExampleInstrumentedTest {
         //final Bitmap source = BitmapFactory.decodeFile("app/fotos/testimg.jpg");
         final Bitmap source = BitmapFactory.decodeResource(res, id);
         final Bitmap blured = blur(source);
+        save(blured);
         final Bitmap thresholded = threshhold(blured);
         save(thresholded);
     }
