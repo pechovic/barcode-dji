@@ -16,14 +16,14 @@
         android:id="@+id/stabilize_drone_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/connect_drone_btn"
         android:text="@string/stabilize_btn_text"/>
 
     <Button
         android:id="@+id/connect_drone_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/test_drone_btn"
         android:text="@string/connect_btn_text"/>
 
     <Button
