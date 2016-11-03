@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Drone</string>
+
+    <string name="stabilize_btn_text">Stabilize!</string>
 </resources>
