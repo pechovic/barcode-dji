@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/cuong/dev/phantom/Mobile-SDK-Android/Sample Code/C:\\phantom\\Mobile-SDK-Android\\Sample Code\\DJI-SDK-LIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\accessory_filter.xml",
+        "source": "/Users/cuong/dev/phantom/Mobile-SDK-Android/Sample Code/C:\\phantom\\Mobile-SDK-Android\\Sample Code\\DJI-SDK-LIB\\build\\intermediates\\bundles\\debug\\res\\xml\\accessory_filter.xml"
+    },
+    {
+        "merged": "/Users/cuong/dev/phantom/Mobile-SDK-Android/Sample Code/DJI-SDK-LIB/build/intermediates/res/merged/androidTest/debug/xml/accessory_filter.xml",
+        "source": "/Users/cuong/dev/phantom/Mobile-SDK-Android/Sample Code/DJI-SDK-LIB/build/intermediates/bundles/debug/res/xml/accessory_filter.xml"
+    }
+]
