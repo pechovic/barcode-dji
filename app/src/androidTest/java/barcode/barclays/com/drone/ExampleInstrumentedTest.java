@@ -35,8 +35,10 @@ public class ExampleInstrumentedTest {
     public void parseJpeg() throws Exception {
         final Bitmap source = BitmapFactory.decodeFile("app/fotos/IMG_20161103_145320192.jpg");
         final Bitmap blured = blur(source);
-        final Bitmap thresholded = threshhold(blured);
-        save(thresholded);
+        final Bitmap threshholded = threshhold(blured);
+        save(threshholded);
+        final Coordinates coords = averageWhite(threshholded);
+        Log.i(TAG, "x: " + coords.x + "; y:" + y);
     }
 
     private Bitmap blur(Bitmap source) {
@@ -64,14 +66,14 @@ public class ExampleInstrumentedTest {
         for (int x=0; x < bitmap.getWidth(); x++) {
             for (int y=0; y < bitmap.getHeight(); y++) {
                 if(bitmap.getPixel(x,y) == Color.WHITE) {
-                    partialX = partialX + x;
-                    partialY = partialY + y;
+                    partialX = partialX + (x - bitmap.getWidth() / 2);
+                    partialY = partialY + (y - bitmap.getHeight() / 2);
                 }
             }
         }
         Coordinates cords = new Coordinates();
-        cords.x = partialX / bitmap.getWidth() - bitmap.getWidth() / 2;
-        cords.y = partialY / bitmap.getHeight() - bitmap.getHeight() / 2;
+        cords.x = partialX / bitmap.getWidth();
+        cords.y = partialY / bitmap.getHeight();
         return cords;
     }
 
