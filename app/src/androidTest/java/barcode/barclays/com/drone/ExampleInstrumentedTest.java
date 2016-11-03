@@ -30,15 +30,14 @@ public class ExampleInstrumentedTest {
     private static final int SCALE = 50;
     public static final int THRESHHOLD = 250;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
-    private static final int X = 450;
-    private static final int Y = 200;
-    private static final int DELTA = 20;
+    private static final int X = 0 * 2400 / 600;
+    private static final int Y = 43 * 1348 / 337;
+    private static final int DELTA = 50;
 
     @Test
     public void parseJpeg() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
         Resources res = appContext.getResources();
         int id = R.drawable.testimg2;
         //final Bitmap source = BitmapFactory.decodeFile("app/fotos/testimg.jpg");
@@ -49,8 +48,8 @@ public class ExampleInstrumentedTest {
         save(thresholded);
         final Coordinates coords = calcWhiteMassCenter(thresholded);
         Log.i(TAG, "x: " + coords.x + "; y:" + coords.y);
-        assertTrue(X - DELTA < coords.x && coords.x <  X + DELTA);
-        assertTrue(Y - DELTA < coords.y && coords.y <  Y + DELTA);
+        assertTrue("x: " + coords.x, X - DELTA < coords.x && coords.x <  X + DELTA);
+        assertTrue("y:" + coords.y, Y - DELTA < coords.y && coords.y <  Y + DELTA);
     }
 
     private Bitmap blur(Bitmap source) {
@@ -75,17 +74,19 @@ public class ExampleInstrumentedTest {
     private Coordinates calcWhiteMassCenter(Bitmap bitmap) {
         int partialX = 0;
         int partialY = 0;
+        int whiteCount = 0;
         for (int x=0; x < bitmap.getWidth(); x++) {
             for (int y=0; y < bitmap.getHeight(); y++) {
                 if(bitmap.getPixel(x,y) == Color.WHITE) {
                     partialX = partialX + (x - bitmap.getWidth() / 2);
                     partialY = partialY + (y - bitmap.getHeight() / 2);
+                    whiteCount++;
                 }
             }
         }
         Coordinates cords = new Coordinates();
-        cords.x = partialX / bitmap.getWidth();
-        cords.y = partialY / bitmap.getHeight();
+        cords.x = partialX / whiteCount;
+        cords.y = partialY / whiteCount;
         return cords;
     }
 
