@@ -30,7 +30,9 @@ public class ExampleInstrumentedTest {
     private static final int SCALE = 50;
     public static final int THRESHHOLD = 250;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
-
+    private static final int X = 450;
+    private static final int Y = 200;
+    private static final int DELTA = 20;
 
     @Test
     public void parseJpeg() throws Exception {
@@ -44,7 +46,11 @@ public class ExampleInstrumentedTest {
         final Bitmap blured = blur(source);
         save(blured);
         final Bitmap thresholded = threshhold(blured);
-        save(thresholded);
+        save(threshholded);
+        final Coordinates coords = calcWhiteMassCenter(threshholded);
+        Log.i(TAG, "x: " + coords.x + "; y:" + y);
+        assertTrue(X - DELTA < coords.x && coords.x <  X + DELTA);
+        assertTrue(Y - DELTA < coords.y && coords.y <  Y + DELTA);
     }
 
     private Bitmap blur(Bitmap source) {
@@ -66,20 +72,20 @@ public class ExampleInstrumentedTest {
         return output;
     }
 
-    private Coordinates averageWhite(Bitmap bitmap) {
+    private Coordinates calcWhiteMassCenter(Bitmap bitmap) {
         int partialX = 0;
         int partialY = 0;
         for (int x=0; x < bitmap.getWidth(); x++) {
             for (int y=0; y < bitmap.getHeight(); y++) {
                 if(bitmap.getPixel(x,y) == Color.WHITE) {
-                    partialX = partialX + x;
-                    partialY = partialY + y;
+                    partialX = partialX + (x - bitmap.getWidth() / 2);
+                    partialY = partialY + (y - bitmap.getHeight() / 2);
                 }
             }
         }
         Coordinates cords = new Coordinates();
-        cords.x = partialX / bitmap.getWidth() - bitmap.getWidth() / 2;
-        cords.y = partialY / bitmap.getHeight() - bitmap.getHeight() / 2;
+        cords.x = partialX / bitmap.getWidth();
+        cords.y = partialY / bitmap.getHeight();
         return cords;
     }
 
