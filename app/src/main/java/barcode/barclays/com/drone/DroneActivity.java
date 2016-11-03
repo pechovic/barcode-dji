@@ -5,8 +5,11 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import dji.thirdparty.eventbus.EventBus;
 
@@ -44,4 +47,20 @@ public class DroneActivity extends AppCompatActivity {
         mUnbinder.unbind();
         super.onDestroy();
     }
+
+    @OnClick(R.id.stabilize_drone_btn)
+    void stabilizeDroneBtnClicked(View view) {
+        Toast.makeText(this, "Stabilize clicked!", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.connect_drone_btn)
+    void connectDroneBtnClicked(View view) {
+        Toast.makeText(this, "Connect clicked!", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.test_drone_btn)
+    void testDroneBtnClicked(View view) {
+        Toast.makeText(this, "Test clicked!", Toast.LENGTH_SHORT).show();
+    }
+
 }
