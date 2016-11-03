@@ -1,6 +1,8 @@
 package barcode.barclays.com.drone;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -16,11 +18,19 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("barcode.barclays.com.drone", appContext.getPackageName());
+    public static final int SCALE = 3;
+
+    @Test
+    public void parseJpeg() throws Exception {
+        final Bitmap source = BitmapFactory.decodeFile("app/fotos/IMG_20161103_145320192.jpg");
+        final Bitmap blured = blur(source);
     }
+
+    private Bitmap blur(Bitmap source) {
+        final Bitmap small = Bitmap.createScaledBitmap(source, source.getWidth() / SCALE, source.getHeight() / SCALE, true);
+        return Bitmap.createScaledBitmap(small, source.getWidth(), source.getHeight(), true);
+    }
+
+//    private
 }
