@@ -84,10 +84,16 @@ public class DJIBarcodeApplication extends Application {
 
         @Override
         public void onGetRegisteredResult(DJIError error) {
+            Handler handler = new Handler(Looper.getMainLooper());
             if(error == DJISDKError.REGISTRATION_SUCCESS) {
                 DJISDKManager.getInstance().startConnectionToProduct();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
-                Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
 
                     @Override

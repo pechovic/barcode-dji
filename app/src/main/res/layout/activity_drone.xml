@@ -13,23 +13,38 @@
         android:background="@color/colorCyan"/>
 
     <Button
-        android:id="@+id/stabilize_drone_btn"
+        android:id="@+id/segment1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/connect_drone_btn"
-        android:text="@string/stabilize_btn_text"/>
+        android:layout_above="@+id/segment2"
+        android:text="Segment1"/>
 
     <Button
-        android:id="@+id/connect_drone_btn"
+        android:id="@+id/segment2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/test_drone_btn"
-        android:text="@string/connect_btn_text"/>
+        android:layout_above="@+id/segment3"
+        android:text="Segment2"/>
 
     <Button
-        android:id="@+id/test_drone_btn"
+        android:id="@+id/segment3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/segment4"
+        android:text="Segment3"/>
+
+    <Button
+        android:id="@+id/segment4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/center"
+        android:text="Segment4"/>
+
+    <Button
+        android:id="@+id/center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/test_btn_text"/>
+        android:text="Center"/>
+
 </RelativeLayout>
