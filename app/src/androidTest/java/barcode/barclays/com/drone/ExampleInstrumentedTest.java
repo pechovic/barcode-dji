@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
 
     private static final int SCALE = 3;
-    public static final int THRESHHOLD = 3000;
+    public static final int THRESHHOLD = 500;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
 
 
