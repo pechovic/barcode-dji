@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import barcode.barclays.com.drone.common.DJIBarcodeApplication;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import dji.common.flightcontroller.DJIVirtualStickFlightControlData;
 import dji.thirdparty.eventbus.EventBus;
 
 public class DroneActivity extends AppCompatActivity {
@@ -51,6 +53,18 @@ public class DroneActivity extends AppCompatActivity {
     @OnClick(R.id.stabilize_drone_btn)
     void stabilizeDroneBtnClicked(View view) {
         Toast.makeText(this, "Stabilize clicked!", Toast.LENGTH_SHORT).show();
+
+        for (int i = 0; i < 400; i++) {
+            DJIBarcodeApplication.getAircraftInstance().getFlightController().sendVirtualStickFlightControlData(
+                    new DJIVirtualStickFlightControlData(0, 10, 0, 0), null);
+
+            try {
+                Thread.sleep(10, 0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @OnClick(R.id.connect_drone_btn)
