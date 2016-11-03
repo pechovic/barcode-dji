@@ -1,6 +1,7 @@
 package barcode.barclays.com.drone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -33,7 +34,13 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void parseJpeg() throws Exception {
-        final Bitmap source = BitmapFactory.decodeFile("app/fotos/IMG_20161103_145320192.jpg");
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Resources res = appContext.getResources();
+        int id = R.drawable.testimg2;
+        //final Bitmap source = BitmapFactory.decodeFile("app/fotos/testimg.jpg");
+        final Bitmap source = BitmapFactory.decodeResource(res, id);
         final Bitmap blured = blur(source);
         final Bitmap thresholded = threshhold(blured);
         save(thresholded);
@@ -45,7 +52,7 @@ public class ExampleInstrumentedTest {
     }
 
     private Bitmap threshhold(Bitmap input){
-        final Bitmap output = input.copy(input.getConfig(), false);
+        final Bitmap output = input.copy(input.getConfig(), true);
         for (int x=0; x < input.getWidth(); x++) {
             for (int y=0; y < input.getHeight(); y++) {
                 if(getBrightness(input.getPixel(x,y)) > THRESHHOLD) {
