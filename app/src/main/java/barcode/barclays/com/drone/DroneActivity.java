@@ -12,7 +12,9 @@ import barcode.barclays.com.drone.common.DJIBarcodeApplication;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import dji.common.error.DJIError;
 import dji.common.flightcontroller.DJIVirtualStickFlightControlData;
+import dji.common.util.DJICommonCallbacks;
 import dji.thirdparty.eventbus.EventBus;
 
 public class DroneActivity extends AppCompatActivity {
@@ -75,6 +77,12 @@ public class DroneActivity extends AppCompatActivity {
     @OnClick(R.id.test_drone_btn)
     void testDroneBtnClicked(View view) {
         Toast.makeText(this, "Test clicked!", Toast.LENGTH_SHORT).show();
+        DJIBarcodeApplication.getAircraftInstance().getFlightController().takeOff(new DJICommonCallbacks.DJICompletionCallback() {
+            @Override
+            public void onResult(DJIError djiError) {
+                //Toast.makeText(this, djiError.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
