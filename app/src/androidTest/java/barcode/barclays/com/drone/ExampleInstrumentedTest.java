@@ -30,7 +30,9 @@ public class ExampleInstrumentedTest {
     private static final int SCALE = 3;
     public static final int THRESHHOLD = 500;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
-
+    private static final int X = 450;
+    private static final int Y = 200;
+    private static final int DELTA = 20;
 
     @Test
     public void parseJpeg() throws Exception {
@@ -44,8 +46,10 @@ public class ExampleInstrumentedTest {
         final Bitmap blured = blur(source);
         final Bitmap threshholded = threshhold(blured);
         save(threshholded);
-        final Coordinates coords = averageWhite(threshholded);
+        final Coordinates coords = calcWhiteMassCenter(threshholded);
         Log.i(TAG, "x: " + coords.x + "; y:" + y);
+        assertTrue(X - DELTA < coords.x && coords.x <  X + DELTA);
+        assertTrue(Y - DELTA < coords.y && coords.y <  Y + DELTA);
     }
 
     private Bitmap blur(Bitmap source) {
@@ -67,7 +71,7 @@ public class ExampleInstrumentedTest {
         return output;
     }
 
-    private Coordinates averageWhite(Bitmap bitmap) {
+    private Coordinates calcWhiteMassCenter(Bitmap bitmap) {
         int partialX = 0;
         int partialY = 0;
         for (int x=0; x < bitmap.getWidth(); x++) {
