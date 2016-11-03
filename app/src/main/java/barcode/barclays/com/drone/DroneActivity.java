@@ -20,6 +20,7 @@ import dji.thirdparty.eventbus.EventBus;
 public class DroneActivity extends AppCompatActivity {
 
     private Unbinder mUnbinder;
+    private DronePositionHandler mDronePositionHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class DroneActivity extends AppCompatActivity {
                     , 1);
         }
 
+        mDronePositionHandler = new DronePositionHandler();
 
     }
 
@@ -52,49 +54,30 @@ public class DroneActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @OnClick(R.id.stabilize_drone_btn)
-    void stabilizeDroneBtnClicked(View view) {
-        Toast.makeText(this, "Stabilize clicked!", Toast.LENGTH_SHORT).show();
+    @OnClick(R.id.segment1)
+    void segment1Click(View view) {
+        mDronePositionHandler.segment1();
+    }
 
-        for (int i = 0; i < 400; i++) {
-            DJIBarcodeApplication.getAircraftInstance().getFlightController().sendVirtualStickFlightControlData(
-                    new DJIVirtualStickFlightControlData(0, 10, 0, 0), null);
+    @OnClick(R.id.segment2)
+    void segment2Click(View view) {
+        mDronePositionHandler.segment2();
+    }
 
-            try {
-                Thread.sleep(10, 0);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    @OnClick(R.id.segment3)
+    void segment3Click(View view) {
+        mDronePositionHandler.segment3();
 
     }
 
-    @OnClick(R.id.connect_drone_btn)
-    void connectDroneBtnClicked(View view) {
-        Toast.makeText(this, "Connect clicked!", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Stabilize clicked!", Toast.LENGTH_SHORT).show();
-
-        for (int i = 0; i < 400; i++) {
-            DJIBarcodeApplication.getAircraftInstance().getFlightController().sendVirtualStickFlightControlData(
-                    new DJIVirtualStickFlightControlData(0, -10, 0, 0), null);
-
-            try {
-                Thread.sleep(10, 0);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    @OnClick(R.id.segment4)
+    void segment4Click(View view) {
+        mDronePositionHandler.segment4();
     }
 
-    @OnClick(R.id.test_drone_btn)
-    void testDroneBtnClicked(View view) {
-        Toast.makeText(this, "Test clicked!", Toast.LENGTH_SHORT).show();
-        DJIBarcodeApplication.getAircraftInstance().getFlightController().takeOff(new DJICommonCallbacks.DJICompletionCallback() {
-            @Override
-            public void onResult(DJIError djiError) {
-                //Toast.makeText(this, djiError.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+    @OnClick(R.id.center)
+    void centerClick(View view) {
+        mDronePositionHandler.stop();
     }
 
 }
