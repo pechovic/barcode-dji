@@ -28,7 +28,7 @@ public class ExampleInstrumentedTest {
         final Bitmap source = BitmapFactory.decodeFile("app/fotos/IMG_20161103_145320192.jpg");
         final Bitmap blured = blur(source);
         final Bitmap thresholded = threshhold(blured);
-        thresholded.sa
+        save(thresholded);
     }
 
     private Bitmap blur(Bitmap source) {
@@ -50,11 +50,55 @@ public class ExampleInstrumentedTest {
         return output;
     }
 
+    private Coordinates averageWhite(Bitmap bitmap) {
+        int partialX = 0;
+        int partialY = 0;
+        for (int x=0; x < input.getWidth(); x++) {
+            for (int y=0; y < input.getHeight(); y++) {
+                if(input.getPixel(x,y) == Color.WHITE) {
+                    partialX = partialX + x;
+                    partialY = partialY + y;
+                }
+            }
+        }
+        Coordinates cords = new Coordinates();
+        cords.x = partialX / bitmap.getWidth();
+        cords.y = partialY / bitmap.getHeight();
+        return cords;
+    }
+
+    private static class Coordinates {
+        public int x;
+        public int y;
+    }
+
     private int getBrightness(int color) {
         int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;
         int b = (color >> 0) & 0xFF;
         return  (int) Math.sqrt(r * r * .241 + g * g * .691 + b * b * .068);
+    }
+
+    private void save(Bitmap input) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/req_images");
+        myDir.mkdirs();
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fname = "Image-" + n + ".jpg";
+        File file = new File(myDir, fname);
+        Log.i(TAG, "" + file);
+        if (file.exists())
+            file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            input.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
