@@ -70,8 +70,8 @@ public class ExampleInstrumentedTest {
             }
         }
         Coordinates cords = new Coordinates();
-        cords.x = partialX / bitmap.getWidth();
-        cords.y = partialY / bitmap.getHeight();
+        cords.x = partialX / bitmap.getWidth() - bitmap.getWidth() / 2;
+        cords.y = partialY / bitmap.getHeight() - bitmap.getHeight() / 2;
         return cords;
     }
 
