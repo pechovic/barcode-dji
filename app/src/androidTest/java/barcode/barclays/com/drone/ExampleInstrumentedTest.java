@@ -30,8 +30,8 @@ public class ExampleInstrumentedTest {
     private static final int SCALE = 10;
     public static final int THRESHHOLD = 250;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
-    private static final int X = 0;
-    private static final int Y = 43;
+    private static final int X = 0 / SCALE;
+    private static final int Y = 43 / SCALE;
     private static final int DELTA = 50;
 
     @Test
