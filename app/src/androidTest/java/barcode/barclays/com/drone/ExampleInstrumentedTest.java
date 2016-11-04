@@ -37,19 +37,23 @@ public class ExampleInstrumentedTest {
     @Test
     public void parseJpeg() throws Exception {
         // Context of the app under test.
+
         Context appContext = InstrumentationRegistry.getTargetContext();
         Resources res = appContext.getResources();
         int id = R.drawable.testimg2;
         //final Bitmap source = BitmapFactory.decodeFile("app/fotos/testimg.jpg");
         final Bitmap source = BitmapFactory.decodeResource(res, id);
+        Long start = System.currentTimeMillis();
         final Bitmap blured = blur(source);
-        save(blured);
+//        save(blured);
         final Bitmap thresholded = threshhold(blured);
-        save(thresholded);
+//        save(thresholded);
         final Coordinates coords = calcWhiteMassCenter(thresholded);
         Log.i(TAG, "x: " + coords.x + "; y:" + coords.y);
         assertTrue("x: " + coords.x, X - DELTA < coords.x && coords.x <  X + DELTA);
         assertTrue("y:" + coords.y, Y - DELTA < coords.y && coords.y <  Y + DELTA);
+        Long end = System.currentTimeMillis();
+        Log.i(TAG, "Time delta:" + (end - start));
     }
 
     private Bitmap blur(Bitmap source) {
