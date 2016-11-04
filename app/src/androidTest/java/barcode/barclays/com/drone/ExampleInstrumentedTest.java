@@ -27,34 +27,35 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
-    private static final int SCALE = 50;
+    private static final int SCALE = 10;
     public static final int THRESHHOLD = 250;
     private static final String TAG = ExampleInstrumentedTest.class.getName();
-    private static final int X = 0 * 2400 / 600;
-    private static final int Y = 43 * 1348 / 337;
+    private static final int X = 0;
+    private static final int Y = 43;
     private static final int DELTA = 50;
 
     @Test
     public void parseJpeg() throws Exception {
-        // Context of the app under test.
+        long start = System.currentTimeMillis();
         Context appContext = InstrumentationRegistry.getTargetContext();
         Resources res = appContext.getResources();
         int id = R.drawable.testimg2;
-        //final Bitmap source = BitmapFactory.decodeFile("app/fotos/testimg.jpg");
-        final Bitmap source = BitmapFactory.decodeResource(res, id);
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inScaled = false;
+        final Bitmap source = BitmapFactory.decodeResource(res, id, opts);
         final Bitmap blured = blur(source);
-        save(blured);
         final Bitmap thresholded = threshhold(blured);
-        save(thresholded);
         final Coordinates coords = calcWhiteMassCenter(thresholded);
         Log.i(TAG, "x: " + coords.x + "; y:" + coords.y);
+        Log.i(TAG, "Time delta: " + (System.currentTimeMillis() - start));
+        save(blured);
+        save(thresholded);
         assertTrue("x: " + coords.x, X - DELTA < coords.x && coords.x <  X + DELTA);
         assertTrue("y:" + coords.y, Y - DELTA < coords.y && coords.y <  Y + DELTA);
     }
 
     private Bitmap blur(Bitmap source) {
-        final Bitmap small = Bitmap.createScaledBitmap(source, source.getWidth() / SCALE, source.getHeight() / SCALE, true);
-        return Bitmap.createScaledBitmap(small, source.getWidth(), source.getHeight(), true);
+        return Bitmap.createScaledBitmap(source, source.getWidth() / SCALE, source.getHeight() / SCALE, true);
     }
 
     private Bitmap threshhold(Bitmap input){
@@ -85,8 +86,10 @@ public class ExampleInstrumentedTest {
             }
         }
         Coordinates cords = new Coordinates();
-        cords.x = partialX / whiteCount;
-        cords.y = partialY / whiteCount;
+        if (whiteCount != 0) {
+            cords.x = partialX / whiteCount;
+            cords.y = partialY / whiteCount;
+        }
         return cords;
     }
 
